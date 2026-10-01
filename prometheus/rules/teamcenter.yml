@@ -1,0 +1,17 @@
+groups:
+- name: teamcenter
+  rules:
+  - record: tc:http_5xx_ratio:5m
+    expr: sum(rate(tc_http_requests_total{status_class="5xx"}[5m])) / clamp_min(sum(rate(tc_http_requests_total[5m])), 0.001)
+  - alert: TeamcenterAdapterDown
+    expr: up{job="teamcenter-adapter"} == 0
+    for: 5m
+    labels: {severity: critical}
+    annotations:
+      summary: Teamcenter monitoring adapter is down
+  - alert: TeamcenterHighErrorRate
+    expr: tc:http_5xx_ratio:5m > 0.05
+    for: 10m
+    labels: {severity: warning}
+    annotations:
+      summary: Teamcenter HTTP 5xx ratio is above 5 percent
