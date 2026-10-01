@@ -1,0 +1,12 @@
+{
+  "title":"Teamcenter Application Monitoring",
+  "uid":"teamcenter-monitoring",
+  "schemaVersion":39,
+  "version":1,
+  "panels":[
+    {"type":"stat","title":"Adapter Up","gridPos":{"h":4,"w":6,"x":0,"y":0},"targets":[{"expr":"up{job=\\\"teamcenter-adapter\\\"}"}]},
+    {"type":"timeseries","title":"HTTP Request Rate","gridPos":{"h":8,"w":12,"x":0,"y":4},"targets":[{"expr":"sum(rate(tc_http_requests_total[5m]))"}]},
+    {"type":"timeseries","title":"HTTP 5xx Ratio","gridPos":{"h":8,"w":12,"x":12,"y":4},"targets":[{"expr":"tc:http_5xx_ratio:5m"}]},
+    {"type":"timeseries","title":"Queue Depth","gridPos":{"h":8,"w":12,"x":0,"y":12},"targets":[{"expr":"sum by (queue) (tc_job_queue_depth)"}]}
+  ]
+}
