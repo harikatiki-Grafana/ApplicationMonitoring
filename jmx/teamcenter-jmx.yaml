@@ -1,0 +1,5 @@
+# Example only. Map these patterns to actual Teamcenter JVM MBeans in your release.
+startDelaySeconds: 0
+lowercaseOutputName: true
+rules:
+  - pattern: '.*'
